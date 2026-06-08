@@ -3,75 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joi Coleman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+
+    <!-- Primary Meta -->
+    <title>Joi Coleman | Founder — Music, Hospitality &amp; Technology</title>
+    <meta name="description" content="Joi Coleman builds companies at the intersection of music, hospitality, and technology — founder of Torch ATL and Torch Music Group." />
+    <link rel="canonical" href="https://joicoleman.com/" />
+
+    <!-- Open Graph (LinkedIn, iMessage, Facebook, Slack) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://joicoleman.com/" />
+    <meta property="og:title" content="Joi Coleman | Founder" />
+    <meta property="og:description" content="Building companies at the intersection of music, hospitality &amp; technology." />
+    <meta property="og:image" content="https://joicoleman.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Joi Coleman" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Joi Coleman | Founder" />
+    <meta name="twitter:description" content="Building companies at the intersection of music, hospitality &amp; technology." />
+    <meta name="twitter:image" content="https://joicoleman.com/og-image.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        :root {
+            --black: #0A0A0A;
+            --paper: #FFFFFF;
+            --muted: rgba(255,255,255,0.6);
+            --hair: rgba(255,255,255,0.16);
+            --gold: #D8BE84;
+            --bar-h: 86px;
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: #0A0A0A;
-            color: #FAFAF8;
-            height: 100vh;
+            font-family: 'Archivo', Arial, sans-serif;
+            background: var(--black);
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* ---- top bar ---- */
+        .bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--bar-h);
+            background: var(--black);
             display: flex;
             align-items: center;
-            justify-content: center;
-            -webkit-font-smoothing: antialiased;
+            justify-content: space-between;
+            padding: 0 clamp(1.2rem, 4vw, 3.5rem);
+            z-index: 100;
+        }
+        .bar a, .bar button { color: #fff; }
+
+        .menu-btn {
+            display: flex; align-items: center; gap: 0.7rem;
+            background: none; border: none; cursor: pointer; font: inherit;
+        }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 4px; }
+        .menu-btn .bars span { display: block; width: 22px; height: 2px; background: #fff; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .menu-btn .label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+        body.nav-open .menu-btn .bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        body.nav-open .menu-btn .bars span:nth-child(2) { opacity: 0; }
+        body.nav-open .menu-btn .bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        .wordmark {
+            font-size: 0.95rem; font-weight: 800; letter-spacing: 0.34em;
+            text-transform: uppercase; text-decoration: none; padding-left: 0.34em;
         }
 
-        .page {
-            text-align: center;
-            padding: 2rem;
-        }
+        .bar-right { display: flex; align-items: center; gap: 1.3rem; }
+        .bar-right a { display: flex; }
+        .bar-right svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.6; }
+        .bar-right a:hover svg { stroke: var(--gold); }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            font-weight: 400;
-            margin-bottom: 0.6rem;
+        /* ---- slide-down nav ---- */
+        .nav-panel {
+            position: fixed; top: var(--bar-h); left: 0; right: 0;
+            background: var(--black); border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 0 clamp(1.2rem, 4vw, 3.5rem);
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease; z-index: 99;
         }
-
-        .tagline {
-            font-size: 0.8rem;
-            font-weight: 300;
-            color: #777;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 2.5rem;
+        body.nav-open .nav-panel { max-height: 60vh; padding: 1.4rem clamp(1.2rem, 4vw, 3.5rem) 2.2rem; }
+        .nav-panel a {
+            display: block; color: #fff; text-decoration: none;
+            font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -0.01em;
+            text-transform: uppercase; padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: color 0.2s ease, padding-left 0.2s ease;
         }
+        .nav-panel a:hover { color: var(--gold); padding-left: 0.4rem; }
 
-        .links {
+        /* ---- hero panel (portrait as background) ---- */
+        .hero {
+            position: relative;
+            margin-top: var(--bar-h);
+            min-height: calc(100vh - var(--bar-h));
+            border-radius: 26px 26px 0 0;
+            overflow: hidden;
+            background-color: var(--black);
+            background-image: url('images/joi-coleman.jpg');
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: right center;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
-            max-width: 280px;
-            margin: 0 auto;
+            justify-content: flex-start;
+            padding: clamp(1.4rem, 3vw, 2.4rem) clamp(1.4rem, 5vw, 4.5rem) clamp(1.2rem, 2.5vw, 1.8rem);
         }
-
-        .links a {
-            display: block;
-            padding: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #FAFAF8;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            transition: border-color 0.2s;
+        /* filter overlay */
+        .hero::before {
+            content: "";
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(90deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.72) 38%, rgba(8,8,8,0.25) 70%, rgba(8,8,8,0.1) 100%),
+                linear-gradient(0deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0) 45%);
         }
+        .hero > * { position: relative; z-index: 1; }
 
-        .links a:hover { border-color: #B89B5E; }
+        .breadcrumb {
+            display: flex; align-items: center; gap: 0.9rem;
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: #fff; z-index: 1;
+            margin-bottom: clamp(1.6rem, 5vw, 3.5rem);
+        }
+        .breadcrumb .sep { width: 1px; height: 13px; background: rgba(255,255,255,0.4); }
+        .breadcrumb .here { color: var(--muted); }
+        .breadcrumb a { color: #fff; text-decoration: none; }
+        .breadcrumb a:hover { color: var(--gold); }
+
+        .content { max-width: 720px; margin: auto 0; }
+
+        .kicker {
+            display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;
+            font-size: clamp(2.6rem, 7vw, 5.5rem); font-weight: 800;
+            line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; color: #fff;
+            margin-bottom: clamp(1.8rem, 4vw, 2.8rem);
+        }
+        .kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+        .kicker .role { color: var(--gold); }
+
+        .statement {
+            font-size: clamp(1.4rem, 2.6vw, 2.2rem); font-weight: 500;
+            line-height: 1.25; letter-spacing: -0.008em;
+            max-width: 22ch; color: #fff;
+        }
+        .statement .accent { color: var(--gold); }
+
+        /* ---- ventures ---- */
+        .ventures { margin-top: clamp(2.6rem, 6vw, 4.5rem); max-width: 560px; }
+        .ventures-head {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--muted);
+            padding-bottom: 0.7rem; border-bottom: 2px solid rgba(255,255,255,0.85);
+        }
+        .venture {
+            display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+            gap: 1.1rem; padding: clamp(0.85rem, 1.6vw, 1.15rem) 0;
+            border-bottom: 1px solid var(--hair);
+            text-decoration: none; color: #fff;
+            transition: padding-left 0.3s ease;
+        }
+        .venture .num { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
+        .venture .body { display: flex; flex-direction: column; gap: 0.3rem; }
+        .venture .name {
+            font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.02em; text-transform: uppercase; transition: color 0.3s ease;
+        }
+        .venture .desc {
+            font-size: 0.68rem; font-weight: 600; color: var(--muted);
+            letter-spacing: 0.12em; text-transform: uppercase;
+        }
+        .venture .arrow { font-size: 1.4rem; color: #fff; transition: transform 0.3s ease, color 0.3s ease; }
+        .venture:hover { padding-left: 0.6rem; }
+        .venture:hover .name { color: var(--gold); }
+        .venture:hover .arrow { transform: translateX(6px); color: var(--gold); }
+
+        footer {
+            margin-top: clamp(1.6rem, 3vw, 2.4rem);
+            display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem;
+            justify-content: space-between; align-items: center;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--muted); z-index: 1;
+        }
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { color: var(--gold); }
+
+        @media (max-width: 640px) {
+            .wordmark { font-size: 0.78rem; letter-spacing: 0.22em; }
+            .hero { background-size: cover; background-position: 55% 12%; justify-content: flex-start; padding-top: 5.5rem; }
+            .hero::before {
+                background:
+                    linear-gradient(0deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.6) 45%, rgba(8,8,8,0.35) 100%);
+            }
+            footer { position: static; margin-top: 2.5rem; }
+        }
     </style>
 </head>
 <body>
-    <div class="page">
-        <h1>Joi Coleman</h1>
-        <p class="tagline">Music Executive. Studio Owner. Builder.</p>
-        <div class="links">
-            <a href="https://torchatl.com">Torch ATL</a>
-            <a href="https://torchmusicgroup.com">Torch Music Group</a>
-            <a href="/consulting">Consulting</a>
+    <header class="bar">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+            <span class="bars"><span></span><span></span><span></span></span>
+            <span class="label">Menu</span>
+        </button>
+        <a class="wordmark" href="/">Joi Coleman</a>
+        <div class="bar-right">
+            <a href="mailto:joi.coleman@torchmusicgroup.com" aria-label="Email">
+                <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            </a>
         </div>
-    </div>
+    </header>
+
+    <nav class="nav-panel" id="navPanel">
+        <a href="https://torchatl.com">Torch ATL</a>
+        <a href="https://torchmusicgroup.com">Torch Music Group</a>
+        <a href="mailto:joi.coleman@torchmusicgroup.com">Contact</a>
+    </nav>
+
+    <main class="hero">
+        <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span class="sep"></span>
+            <span class="here">Founder</span>
+        </nav>
+
+        <div class="content">
+            <h1 class="kicker"><span>Joi Coleman</span><span class="dot"></span><span class="role">Founder</span></h1>
+
+            <section class="ventures">
+                <p class="ventures-head">Ventures</p>
+                <a class="venture" href="https://torchatl.com">
+                    <span class="num">01</span>
+                    <span class="body">
+                        <span class="name">Torch ATL</span>
+                        <span class="desc">Luxury Creative Estate</span>
+                    </span>
+                    <span class="arrow">→</span>
+                </a>
+                <a class="venture" href="https://torchmusicgroup.com">
+                    <span class="num">02</span>
+                    <span class="body">
+                        <span class="name">Torch Music Group</span>
+                        <span class="desc">Management • Development • Publishing</span>
+                    </span>
+                    <span class="arrow">→</span>
+                </a>
+            </section>
+        </div>
+
+        <footer>
+            <span>© 2026 Joi Coleman</span>
+            <a href="mailto:joi.coleman@torchmusicgroup.com">joi.coleman@torchmusicgroup.com</a>
+        </footer>
+    </main>
+
+    <script>
+        const btn = document.getElementById('menuBtn');
+        btn.addEventListener('click', () => {
+            const open = document.body.classList.toggle('nav-open');
+            btn.setAttribute('aria-expanded', open);
+        });
+        document.querySelectorAll('#navPanel a').forEach(a =>
+            a.addEventListener('click', () => document.body.classList.remove('nav-open')));
+    </script>
 </body>
 </html>

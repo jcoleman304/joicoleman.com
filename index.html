@@ -188,15 +188,65 @@
         .venture:hover .name { color: var(--gold); }
         .venture:hover .arrow { transform: translateX(6px); color: var(--gold); }
 
-        footer {
+        /* ---- scroll cue ---- */
+        .scroll-cue {
             margin-top: clamp(1.6rem, 3vw, 2.4rem);
+            align-self: flex-start;
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--muted); text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .scroll-cue:hover { color: var(--gold); }
+        .scroll-cue .chev { animation: bob 1.8s ease-in-out infinite; }
+        @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+        /* ---- about / bio ---- */
+        .about { background: var(--black); padding: clamp(3.5rem, 8vw, 7rem) clamp(1.4rem, 5vw, 4.5rem); }
+        .about-inner {
+            max-width: 1040px; margin: 0 auto;
+            display: grid; grid-template-columns: 170px 1fr; gap: clamp(1.6rem, 4vw, 4rem) clamp(2rem, 5vw, 4.5rem);
+        }
+        .section-label {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--muted); padding-top: 0.45rem;
+        }
+        .bio p {
+            font-size: clamp(1.05rem, 1.7vw, 1.32rem); font-weight: 400;
+            line-height: 1.62; color: rgba(255,255,255,0.82); max-width: 62ch;
+        }
+        .bio p + p { margin-top: 1.25rem; }
+        .bio strong { color: #fff; font-weight: 600; }
+        .bio em { color: var(--gold); font-style: italic; }
+
+        .social { display: flex; flex-direction: column; }
+        .social a {
+            display: flex; align-items: baseline; gap: 1rem;
+            padding: clamp(0.85rem, 1.6vw, 1.15rem) 0;
+            border-bottom: 1px solid var(--hair);
+            text-decoration: none; color: #fff;
+            font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.02em;
+            transition: padding-left 0.3s ease, color 0.3s ease;
+        }
+        .social a:first-child { border-top: 1px solid var(--hair); }
+        .social a .handle { font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
+        .social a .arrow { margin-left: auto; color: var(--muted); font-size: 1.2rem; transition: transform 0.3s ease, color 0.3s ease; }
+        .social a:hover { padding-left: 0.5rem; color: var(--gold); }
+        .social a:hover .arrow { transform: translateX(6px); color: var(--gold); }
+
+        /* ---- site footer ---- */
+        .site-footer {
+            background: var(--black);
+            border-top: 1px solid var(--hair);
+            padding: 1.8rem clamp(1.4rem, 5vw, 4.5rem) 2.4rem;
             display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem;
             justify-content: space-between; align-items: center;
             font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--muted); z-index: 1;
+            text-transform: uppercase; color: var(--muted);
         }
-        footer a { color: var(--muted); text-decoration: none; }
-        footer a:hover { color: var(--gold); }
+        .site-footer a { color: var(--muted); text-decoration: none; }
+        .site-footer a:hover { color: var(--gold); }
 
         @media (max-width: 640px) {
             .wordmark { font-size: 0.78rem; letter-spacing: 0.22em; }
@@ -205,7 +255,9 @@
                 background:
                     linear-gradient(0deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.6) 45%, rgba(8,8,8,0.35) 100%);
             }
-            footer { position: static; margin-top: 2.5rem; }
+            .about-inner { grid-template-columns: 1fr; gap: 0.5rem; }
+            .section-label { padding-top: 0; margin-top: 1.6rem; }
+            .about-inner > .section-label:first-child { margin-top: 0; }
         }
     </style>
 </head>
@@ -224,8 +276,10 @@
     </header>
 
     <nav class="nav-panel" id="navPanel">
+        <a href="#about">About</a>
         <a href="https://torchatl.com">Torch ATL</a>
         <a href="https://torchmusicgroup.com">Torch Music Group</a>
+        <a href="https://instagram.com/thejawnjoi" target="_blank" rel="noopener">Instagram</a>
         <a href="mailto:info@torchmusicgroup.com">Contact</a>
     </nav>
 
@@ -260,10 +314,34 @@
             </section>
         </div>
 
-        <footer>
-            <span>© 2026 Joi Coleman</span>
-        </footer>
+        <a class="scroll-cue" href="#about">About <span class="chev">↓</span></a>
     </main>
+
+    <section class="about" id="about">
+        <div class="about-inner">
+            <p class="section-label">About</p>
+            <div class="bio">
+                <p>Joi Coleman is a Philadelphia native and Atlanta-based, <strong>Grammy-nominated songwriter</strong> and former Atlantic Records A&amp;R.</p>
+                <p>She spent nine years at Atlantic Records across A&amp;R and studio operations — A&amp;R&rsquo;ing all three of Big Scarr&rsquo;s studio albums and developing artists across the label&rsquo;s roster. Along the way she built her own platform in radio, hosting <em>The Jawn Joi</em> on Dash Radio and producing <em>Streetz Is Watchin&rsquo;</em> on Shade 45. Her songwriting earned a Grammy nomination on Dreamville&rsquo;s <em>Revenge of the Dreamers III</em>.</p>
+                <p>Today she builds companies at the intersection of <strong>music, hospitality &amp; technology</strong> — founder of Torch ATL and Torch Music Group, giving artists and creatives the infrastructure to be the engine of their own careers.</p>
+            </div>
+
+            <p class="section-label">Connect</p>
+            <nav class="social">
+                <a href="https://instagram.com/thejawnjoi" target="_blank" rel="noopener">
+                    Instagram <span class="handle">@thejawnjoi</span> <span class="arrow">→</span>
+                </a>
+                <a href="mailto:info@torchmusicgroup.com">
+                    Email <span class="handle">info@torchmusicgroup.com</span> <span class="arrow">→</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <span>© 2026 Joi Coleman</span>
+        <a href="https://instagram.com/thejawnjoi" target="_blank" rel="noopener">@thejawnjoi</a>
+    </footer>
 
     <script>
         const btn = document.getElementById('menuBtn');
